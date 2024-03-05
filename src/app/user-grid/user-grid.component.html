@@ -1,0 +1,13 @@
+<ng-container *ngIf="!users?.length">
+    <div class="no-results">
+        <p>Oops! No users match your search. Give it another try with a different name.</p>
+    </div>
+</ng-container>
+<div class="user-list">
+    <div class="user-item" *ngFor="let user of users">
+        <a [href]="user.html_url" target="_blank">
+            <img src="{{user.avatar_url}}" alt="avatar">
+            <p>{{user.login}}</p>
+        </a>
+    </div>
+</div>
