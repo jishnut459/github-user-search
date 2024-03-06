@@ -9,8 +9,6 @@ export class SearchBoxComponent {
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
   onInput(event: any): void {
-    console.log(event.target.value);
-
     this.search.emit(event.target.value);
   }
 }

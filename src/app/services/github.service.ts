@@ -10,9 +10,11 @@ import {
   providedIn: 'root',
 })
 export class GithubService {
-  constructor(private http: HttpClient) {}
-
+  
   BASE_URL = 'https://api.github.com';
+  
+  constructor(private http: HttpClient) {}
+  
   private cachedUsers$: Observable<GithubUser[]> | undefined;
 
   getUsers(perPage: number = 50): Observable<GithubUser[]> {

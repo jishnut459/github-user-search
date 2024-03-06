@@ -18,7 +18,7 @@ import { GithubService } from './services/github.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'github-user-search';
   users: GithubUser[] = [];
-  initialUser: GithubUser[] = [];
+  initialUsers: GithubUser[] = [];
 
   private unsubscribeSubject = new Subject<void>();
   private searchQuerySubject = new Subject<string>();
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribeSubject))
       .subscribe((res) => {
         this.users = res;
-        this.initialUser = res;
+        this.initialUsers = res;
       });
   }
 
@@ -53,13 +53,16 @@ export class AppComponent implements OnInit, OnDestroy {
         switchMap((query) =>
           query.trim() === ''
             ? of({
-                total_count: this.initialUser.length,
-                items: this.initialUser,
+                total_count: this.initialUsers.length,
+                items: this.initialUsers,
               })
             : this.githubService.getUsersByName(query).pipe(
                 catchError((error) => {
                   console.error('Error fetching users:', error);
-                  return throwError(() => error);
+                  return of({
+                    total_count: this.initialUsers.length,
+                    items: this.initialUsers,
+                  });
                 })
               )
         ),

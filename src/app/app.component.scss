@@ -1,10 +1,13 @@
+$primary-color: rgb(43, 50, 57);
+
 h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: center;
-  color: rgb(43, 50, 57);
+  color: $primary-color;
 }
+
 .wrapper {
   max-width: 900px;
   margin: 0 auto;
